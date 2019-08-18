@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Show channel content</title>
+</head>
+<body>
+	<h1 id="channel_welcome"></h1>
+	<img style="height: 200px; width: 200px;" id="channel_profile_picture" src="https://amp.businessinsider.com/images/59a59a8d79bbfd1d008b601a-960-480.png">
+	<h1 id="channel_name"></h1>
+	<h3>Videos</h3>
+	<div id="videos">
+	</div>
+</body>
+<script type="text/javascript">
+var channel_id = findGetParameter("channel_id");
+//get GET parameter
+function findGetParameter(parameterName) {
+    var result = null,
+        tmp = [];
+    location.search
+        .substr(1)
+        .split("&")
+        .forEach(function (item) {
+          tmp = item.split("=");
+          if (tmp[0] === parameterName) result = decodeURIComponent(tmp[1]);
+        });
+    return result;
+}
+//http request GET
+function httpGet(theUrl)
+{
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.open( "GET", theUrl, false );
+    xmlHttp.send( null );
+    return xmlHttp.responseText;
+}
+
+if(channel_id == null)
+	window.location.replace("./");
+else
+{
+	var channel_details = JSON.parse(httpGet("http://localhost/technical_exam/youtube_channel_json.php?channel_id="+channel_id));
+
+	document.getElementById("channel_profile_picture").src = channel_details.profile_picture;
+	document.getElementById("channel_name").innerHTML = channel_details.name;
+	document.getElementById("channel_welcome").innerHTML = "Welcome to " + channel_details.name + " channel";
+	//alert(channel_details.id);
+
+	var videos = document.getElementById('videos');
+
+	for (var i = 0; i < channel_details.videos.length; i++)
+	{
+		videos.innerHTML += '<div><a href="'+ channel_details.videos[i].video_url +'" target="_blank"><img style="height: 150px; width: 150px;" src="'+channel_details.videos[i].thumbnail+'"></a><br><b>'+channel_details.videos[i].title+'</b></div>';
+  	}
+}
+
+
+</script>
+</html>
