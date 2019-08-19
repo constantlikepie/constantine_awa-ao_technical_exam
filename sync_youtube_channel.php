@@ -83,7 +83,7 @@
 						die($e);
 					}
 		}
-		header("Location: http://localhost/technical_exam/show_youtube_channel.html?channel_id=".$channel_id);
+		header("Location: http://localhost/constantine_awaao_technical_exam/show_youtube_channel.html?channel_id=".$channel_id);
 	}
 	else
 		die("Trying to sync some data? Nope. Gimme the token first.");
