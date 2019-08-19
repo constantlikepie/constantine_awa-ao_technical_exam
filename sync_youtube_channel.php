@@ -20,7 +20,7 @@
 
 	if($lemmesync)
 	{
-		$channel_data = json_decode(@file_get_contents('https://www.googleapis.com/youtube/v3/channels?part=snippet&id='.$YT_CHANNEL_ID.'&key='.$YT_API_KEY));
+		$channel_data = json_decode(@file_get_contents('https://www.googleapis.com/youtube/v3/channels?part=snippet&forUsername='.$YT_CHANNEL_ID.'&key='.$YT_API_KEY));
 		
 		if(is_null($channel_data))
 			die("Invalid channel ID or token given.");
@@ -51,7 +51,7 @@
 			die($e);
 		}
 
-		$videos = json_decode(file_get_contents('https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&channelId='.$YT_CHANNEL_ID.'&maxResults='.$videos_count_to_read.'&key='.$YT_API_KEY));
+		$videos = json_decode(file_get_contents('https://www.googleapis.com/youtube/v3/search?order=date&part=snippet&forUsername='.$YT_CHANNEL_ID.'&maxResults='.$videos_count_to_read.'&key='.$YT_API_KEY));
 
 		$videos = $videos->items;
 
