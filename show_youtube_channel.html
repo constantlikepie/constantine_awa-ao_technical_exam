@@ -39,7 +39,7 @@ if(channel_id == null)
 	window.location.replace("./");
 else
 {
-	var channel_details = JSON.parse(httpGet("http://localhost/constantine_awaao_technical_exam/youtube_channel_json.php?channel_id="+channel_id));
+	var channel_details = JSON.parse(httpGet("http://localhost/constantine_awa-ao_technical_exam/youtube_channel_json.php?channel_id="+channel_id));
 
 	document.getElementById("channel_profile_picture").src = channel_details.profile_picture;
 	document.getElementById("channel_name").innerHTML = channel_details.name;
